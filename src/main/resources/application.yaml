@@ -27,7 +27,6 @@ spring:
       base-path: /api
       detection-strategy: annotated
 
-
 #  security:
 #    oauth2:
 #      client:
