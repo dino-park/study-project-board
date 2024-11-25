@@ -41,6 +41,4 @@ public class ArticleController {
 
         return "articles/detail";
     }
-
 }
-
