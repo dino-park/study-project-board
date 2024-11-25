@@ -1,8 +1,7 @@
 package com.greyson.projectboard.controller;
 
 import com.greyson.projectboard.config.SecurityConfig;
-import com.greyson.projectboard.domain.Article;
-import com.greyson.projectboard.dto.ArticleWithCommentDto;
+import com.greyson.projectboard.dto.ArticleWithCommentsDto;
 import com.greyson.projectboard.dto.UserAccountDto;
 import com.greyson.projectboard.service.ArticleService;
 import org.junit.jupiter.api.Disabled;
@@ -96,8 +95,8 @@ class ArticleControllerTest {
                 .andExpect(model().attributeExists("articles/search-hashtag"));
     }
 
-    private ArticleWithCommentDto createArticleWithCommentsDto() {
-        return ArticleWithCommentDto.of(
+    private ArticleWithCommentsDto createArticleWithCommentsDto() {
+        return ArticleWithCommentsDto.of(
                 1L,
                 createUserAccountDto(),
                 Set.of(),
