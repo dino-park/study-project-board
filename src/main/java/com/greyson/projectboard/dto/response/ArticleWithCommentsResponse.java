@@ -1,6 +1,6 @@
 package com.greyson.projectboard.dto.response;
 
-import com.greyson.projectboard.dto.ArticleWithCommentDto;
+import com.greyson.projectboard.dto.ArticleWithCommentsDto;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -24,7 +24,7 @@ public record ArticleWithCommentsResponse(
         return new ArticleWithCommentsResponse(id, title, content, hashtag, createdAt, email, nickName, articleCommentResponses);
     }
 
-    public static ArticleWithCommentsResponse from(ArticleWithCommentDto dto){
+    public static ArticleWithCommentsResponse from(ArticleWithCommentsDto dto){
         String nickName = dto.userAccountDto().nickName();
         if (nickName == null || nickName.isBlank()) {
             nickName = dto.userAccountDto().userId();

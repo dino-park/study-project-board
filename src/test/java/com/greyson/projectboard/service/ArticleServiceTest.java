@@ -4,7 +4,7 @@ import com.greyson.projectboard.domain.Article;
 import com.greyson.projectboard.domain.UserAccount;
 import com.greyson.projectboard.domain.type.SearchType;
 import com.greyson.projectboard.dto.ArticleDto;
-import com.greyson.projectboard.dto.ArticleWithCommentDto;
+import com.greyson.projectboard.dto.ArticleWithCommentsDto;
 import com.greyson.projectboard.dto.UserAccountDto;
 import com.greyson.projectboard.repository.ArticleRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -68,7 +68,7 @@ class ArticleServiceTest {
         Article article = createArticle();
         given(articleRepository.findById(articleId)).willReturn(Optional.of(article));
         // When
-        ArticleWithCommentDto dto = sut.getArticle(articleId);
+        ArticleWithCommentsDto dto = sut.getArticle(articleId);
         // Then
         assertThat(dto)
                 .hasFieldOrPropertyWithValue("title", article.getTitle())

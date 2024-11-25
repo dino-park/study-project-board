@@ -3,7 +3,7 @@ package com.greyson.projectboard.service;
 import com.greyson.projectboard.domain.Article;
 import com.greyson.projectboard.domain.type.SearchType;
 import com.greyson.projectboard.dto.ArticleDto;
-import com.greyson.projectboard.dto.ArticleWithCommentDto;
+import com.greyson.projectboard.dto.ArticleWithCommentsDto;
 import com.greyson.projectboard.repository.ArticleRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,8 +37,8 @@ public class ArticleService {
     }
 
     @Transactional(readOnly = true)
-    public ArticleWithCommentDto getArticle(long articleId) {
-        return articleRepository.findById(articleId).map(ArticleWithCommentDto::from)
+    public ArticleWithCommentsDto getArticle(long articleId) {
+        return articleRepository.findById(articleId).map(ArticleWithCommentsDto::from)
                 .orElseThrow(()-> new EntityNotFoundException("게시글이 없습니다. - articleId: " + articleId));
     }
 
