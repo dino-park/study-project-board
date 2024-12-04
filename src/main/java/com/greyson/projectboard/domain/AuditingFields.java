@@ -3,6 +3,9 @@ package com.greyson.projectboard.domain;
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
+
+import lombok.Getter;
+import lombok.ToString;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -12,6 +15,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
+@Getter
+@ToString
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
 public class AuditingFields {

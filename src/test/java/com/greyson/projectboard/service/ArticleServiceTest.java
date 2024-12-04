@@ -110,7 +110,7 @@ class ArticleServiceTest {
         // Given
         Article article = createArticle();
         ArticleDto dto = createArticleDto("새 타이틀", "새 내용", "#springboot");
-        given(articleRepository.save(any(Article.class))).willReturn(null);
+        given(articleRepository.getReferenceById(dto.id())).willReturn(null);
         // When
         sut.updateArticle(dto);
         // Then
