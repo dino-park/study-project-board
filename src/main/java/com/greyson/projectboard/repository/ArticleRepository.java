@@ -21,7 +21,7 @@ public interface ArticleRepository extends
     Page<Article> findByTitleContaining(String title, Pageable pageable);
     Page<Article> findByContentContaining(String content, Pageable pageable);
     Page<Article> findByUserAccount_UserIdContaining(String userId, Pageable pageable);
-    Page<Article> findByUserAccount_NicknameContaining(String nickName, Pageable pageable);
+    Page<Article> findByUserAccount_NickNameContaining(String nickName, Pageable pageable);
     Page<Article> findByHashtag(String hashtag, Pageable pageable);
 
 
