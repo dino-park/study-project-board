@@ -59,6 +59,6 @@ public class Article extends AuditingFields{
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return Objects.hash(id);
     }
 }

@@ -2,6 +2,7 @@ package com.greyson.projectboard.dto;
 
 import com.greyson.projectboard.domain.UserAccount;
 
+import javax.persistence.Column;
 import java.time.LocalDateTime;
 
 /**
@@ -12,16 +13,16 @@ public record UserAccountDto(
         String userId,
         String userPassword,
         String email,
-        String nickName,
+        String nickname,
         String memo,
         LocalDateTime createdAt,
         String createdBy,
         LocalDateTime modifiedAt,
         String modifiedBy) {
     public static UserAccountDto of(Long id, String userId, String userPassword,
-                                    String email, String nickName, String memo, LocalDateTime createdAt, LocalDateTime modifiedAt,
+                                    String email, String nickname, String memo, LocalDateTime createdAt, LocalDateTime modifiedAt,
                                     String createdBy, String modifiedBy) {
-        return new UserAccountDto(id, userId, userPassword, email, nickName, memo, createdAt, createdBy, modifiedAt, modifiedBy);
+        return new UserAccountDto(id, userId, userPassword, email, nickname, memo, createdAt, createdBy, modifiedAt, modifiedBy);
     }
 
     public static UserAccountDto from(UserAccount entity) {
@@ -30,7 +31,7 @@ public record UserAccountDto(
                 entity.getUserId(),
                 entity.getUserPassword(),
                 entity.getEmail(),
-                entity.getNickName(),
+                entity.getNickname(),
                 entity.getMemo(),
                 entity.getCreatedAt(),
                 entity.getCreatedBy(),
@@ -44,7 +45,7 @@ public record UserAccountDto(
                 userId,
                 userPassword,
                 email,
-                nickName,
+                nickname,
                 memo
         );
     }
