@@ -10,7 +10,7 @@ import java.util.Objects;
 @Getter
 @ToString
 @Table(indexes = {
-        @Index(columnList = "userId"),
+        @Index(columnList = "userId", unique = true),
         @Index(columnList = "email", unique = true),
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy")
@@ -25,20 +25,21 @@ public class UserAccount extends AuditingFields{
     @Setter @Column(nullable = false) private String userPassword;
 
     @Setter @Column(length = 100) private String email;
-    @Setter @Column(length = 100) private String nickName;
+    @Setter @Column(length = 100)
+    private String nickname;
     @Setter private String memo;
 
     protected UserAccount() {}  // JPA는 매개변수가 없는 기본생성자가 필요하므로 생성
 
-    private UserAccount(String userId, String userPassword, String email, String nickName, String memo) {
+    private UserAccount(String userId, String userPassword, String email, String nickname, String memo) {
         this.userId = userId;
         this.userPassword = userPassword;
         this.email = email;
-        this.nickName = nickName;
+        this.nickname = nickname;
         this.memo = memo;
     }
-    public static UserAccount of(String userId, String userPassword, String email, String nickName, String memo) {
-        return new UserAccount(userId, userPassword, email, nickName, memo);
+    public static UserAccount of(String userId, String userPassword, String email, String nickname, String memo) {
+        return new UserAccount(userId, userPassword, email, nickname, memo);
     }
 
     @Override

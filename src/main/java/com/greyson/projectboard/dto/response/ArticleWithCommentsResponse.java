@@ -15,19 +15,19 @@ public record ArticleWithCommentsResponse(
         String hashtag,
         LocalDateTime createdAt,
         String email,
-        String nickName,
-        Set<ArticleCommentResponse> articleCommentResponses
+        String nickname,
+        Set<ArticleCommentResponse> articleCommentsResponse
 ) implements Serializable {
     public static ArticleWithCommentsResponse of(Long id, String title, String content, String hashtag,
-                                                 LocalDateTime createdAt, String email, String nickName,
-                                                 Set<ArticleCommentResponse> articleCommentResponses) {
-        return new ArticleWithCommentsResponse(id, title, content, hashtag, createdAt, email, nickName, articleCommentResponses);
+                                                 LocalDateTime createdAt, String email, String nickname,
+                                                 Set<ArticleCommentResponse> articleCommentsResponse) {
+        return new ArticleWithCommentsResponse(id, title, content, hashtag, createdAt, email, nickname, articleCommentsResponse);
     }
 
     public static ArticleWithCommentsResponse from(ArticleWithCommentsDto dto){
-        String nickName = dto.userAccountDto().nickName();
-        if (nickName == null || nickName.isBlank()) {
-            nickName = dto.userAccountDto().userId();
+        String nickname = dto.userAccountDto().nickname();
+        if (nickname == null || nickname.isBlank()) {
+            nickname = dto.userAccountDto().userId();
         }
         return new ArticleWithCommentsResponse(
                 dto.id(),
@@ -36,7 +36,7 @@ public record ArticleWithCommentsResponse(
                 dto.hashtag(),
                 dto.createdAt(),
                 dto.userAccountDto().email(),
-                nickName,
+                nickname,
                 dto.articleCommentDtos().stream()
                         .map(ArticleCommentResponse::from)
                         .collect(Collectors.toCollection(LinkedHashSet::new))
