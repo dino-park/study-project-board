@@ -1,4 +1,4 @@
-package com.greyson.projectboard.domain.type;
+package com.greyson.projectboard.domain.constant;
 
 import lombok.Getter;
 
