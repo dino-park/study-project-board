@@ -2,7 +2,6 @@ package com.greyson.projectboard.dto;
 
 import com.greyson.projectboard.domain.UserAccount;
 
-import javax.persistence.Column;
 import java.time.LocalDateTime;
 
 /**

@@ -7,6 +7,7 @@ import com.greyson.projectboard.dto.ArticleCommentDto;
 import com.greyson.projectboard.dto.UserAccountDto;
 import com.greyson.projectboard.repository.ArticleCommentRepository;
 import com.greyson.projectboard.repository.ArticleRepository;
+import com.greyson.projectboard.repository.UserAccountRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,6 +30,7 @@ class ArticleCommentServiceTest {
 
     @Mock private ArticleCommentRepository articleCommentRepository;
     @Mock private ArticleRepository articleRepository;
+    @Mock private UserAccountRepository userAccountRepository;
 
     @DisplayName("게시글ID 조회 시, 해당 댓글 리스트를 반환")
     @Test
@@ -41,7 +43,7 @@ class ArticleCommentServiceTest {
         List<ArticleCommentDto> actual = sut.searchArticleComments(articleId);
         // Then
         assertThat(actual).hasSize(1).first().hasFieldOrPropertyWithValue("content", expected.getContent());
-        then(articleCommentRepository).should().findById(articleId);
+        then(articleCommentRepository).should().findByArticle_Id(articleId);
     }
 
     @DisplayName("댓글 내용 입력 시, 댓글을 저장")
@@ -50,11 +52,13 @@ class ArticleCommentServiceTest {
         // Given
         ArticleCommentDto dto = createArticleCommentDto("댓글");
         given(articleRepository.getReferenceById(dto.articleId())).willReturn(createArticle());
+        given(userAccountRepository.getReferenceById(dto.userAccountDto().userId())).willReturn(createUserAccount());
         given(articleCommentRepository.save(any(ArticleComment.class))).willReturn(null);
         // When
         sut.saveArticleComment(dto);
         // Then
         then(articleRepository).should().getReferenceById(dto.articleId());
+        then(userAccountRepository).should().getReferenceById(dto.userAccountDto().userId());
         then(articleCommentRepository).should().save(any(ArticleComment.class));
     }
 
@@ -68,6 +72,7 @@ class ArticleCommentServiceTest {
         sut.saveArticleComment(dto);
         // Then
         then(articleRepository).should().getReferenceById(dto.articleId());
+        then(userAccountRepository).shouldHaveNoInteractions();
         then(articleCommentRepository).shouldHaveNoInteractions();
     }
 
