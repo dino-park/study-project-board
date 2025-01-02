@@ -2,7 +2,6 @@ package com.greyson.projectboard.controller;
 
 import com.greyson.projectboard.domain.constant.FormStatus;
 import com.greyson.projectboard.domain.constant.SearchType;
-import com.greyson.projectboard.dto.UserAccountDto;
 import com.greyson.projectboard.dto.request.ArticleRequest;
 import com.greyson.projectboard.dto.response.ArticleResponse;
 import com.greyson.projectboard.dto.response.ArticleWithCommentsResponse;
