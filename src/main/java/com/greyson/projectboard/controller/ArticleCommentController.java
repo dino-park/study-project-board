@@ -1,13 +1,10 @@
 package com.greyson.projectboard.controller;
 
-import com.greyson.projectboard.dto.UserAccountDto;
 import com.greyson.projectboard.dto.request.ArticleCommentRequest;
-import com.greyson.projectboard.dto.request.ArticleRequest;
 import com.greyson.projectboard.dto.security.BoardPrincipal;
 import com.greyson.projectboard.service.ArticleCommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
