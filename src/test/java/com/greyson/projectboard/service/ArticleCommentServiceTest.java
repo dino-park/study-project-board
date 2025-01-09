@@ -2,6 +2,7 @@ package com.greyson.projectboard.service;
 
 import com.greyson.projectboard.domain.Article;
 import com.greyson.projectboard.domain.ArticleComment;
+import com.greyson.projectboard.domain.Hashtag;
 import com.greyson.projectboard.domain.UserAccount;
 import com.greyson.projectboard.dto.ArticleCommentDto;
 import com.greyson.projectboard.dto.UserAccountDto;
@@ -18,6 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -148,7 +150,7 @@ class ArticleCommentServiceTest {
 
     private ArticleComment createArticleComment(String content) {
         return ArticleComment.of(
-                Article.of(createUserAccount(), "title", "content", "hashtag"),
+                createArticle(),
                 createUserAccount(),
                 content
         );
@@ -165,7 +167,18 @@ class ArticleCommentServiceTest {
     }
 
     private Article createArticle() {
-        return Article.of(createUserAccount(), "title", "content", "#java");
+        Article article = Article.of(
+                createUserAccount(),
+                "title",
+                "content"
+        );
+        article.addHashtags(Set.of(createHashtag(article)));
+
+        return article;
+    }
+
+    private Hashtag createHashtag(Article article) {
+        return Hashtag.of("java");
     }
 
 }

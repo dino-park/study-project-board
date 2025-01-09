@@ -1,11 +1,11 @@
 package com.greyson.projectboard.controller;
 
-import com.greyson.projectboard.config.SecurityConfig;
 import com.greyson.projectboard.config.TestSecurityConfig;
 import com.greyson.projectboard.domain.constant.FormStatus;
 import com.greyson.projectboard.domain.constant.SearchType;
 import com.greyson.projectboard.dto.ArticleDto;
 import com.greyson.projectboard.dto.ArticleWithCommentsDto;
+import com.greyson.projectboard.dto.HashtagDto;
 import com.greyson.projectboard.dto.UserAccountDto;
 import com.greyson.projectboard.dto.request.ArticleRequest;
 import com.greyson.projectboard.dto.response.ArticleResponse;
@@ -69,7 +69,9 @@ class ArticleControllerTest {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
                 .andExpect(view().name("articles/index"))
                 .andExpect(model().attributeExists("articles"))
-                .andExpect(model().attributeExists("paginationBarNumbers"));
+                .andExpect(model().attributeExists("paginationBarNumbers"))
+                .andExpect(model().attributeExists("searchTypes"))
+                .andExpect(model().attribute("searchTypeHashtag", SearchType.HASHTAG));
         then(articleService).should().searchArticles(eq(null), eq(null), any(Pageable.class));
         then(paginationService).should().getPaginationBarNumbers(anyInt(), anyInt());
     }
@@ -237,7 +239,7 @@ class ArticleControllerTest {
     @Test
     void givenNewArticleInfo_whenRequesting_thenSavesNewArticle() throws Exception {
         // Given
-        ArticleRequest articleRequest = ArticleRequest.of("new title", "new content", "#new");
+        ArticleRequest articleRequest = ArticleRequest.of("new title", "new content");
         willDoNothing().given(articleService).saveArticle(any(ArticleDto.class));
         // When & Then
         mvc.perform(
@@ -289,7 +291,7 @@ class ArticleControllerTest {
     void givenUpdatedArticleInfo_whenRequesting_thenUpdatesNewArticle() throws Exception {
         // Given
         long articleId = 1L;
-        ArticleRequest articleRequest = ArticleRequest.of("new title", "new content", "#new");
+        ArticleRequest articleRequest = ArticleRequest.of("new title", "new content");
         willDoNothing().given(articleService).updateArticle(eq(articleId), any(ArticleDto.class));
 
         // When & Then
@@ -331,7 +333,7 @@ class ArticleControllerTest {
                 createUserAccountDto(),
                 "title",
                 "content",
-                "#java"
+                Set.of(HashtagDto.of("java"))
         );
     }
 
@@ -342,7 +344,7 @@ class ArticleControllerTest {
                 Set.of(),
                 "title",
                 "content",
-                "#java",
+                Set.of(HashtagDto.of("java")),
                 LocalDateTime.now(),
                 "dino",
                 LocalDateTime.now(),
