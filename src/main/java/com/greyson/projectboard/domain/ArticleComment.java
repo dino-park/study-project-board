@@ -25,6 +25,7 @@ public class ArticleComment extends AuditingFields {
     private Long id;
 
     @Setter @ManyToOne(optional = false) private Article article;    // 게시글 (ID)
+
     @Setter
     @ManyToOne(optional = false)
     @JoinColumn(name="userId")
@@ -37,7 +38,7 @@ public class ArticleComment extends AuditingFields {
 
     @ToString.Exclude
     @OrderBy("createdAt ASC")
-    @OneToMany(mappedBy = "parentCommentID", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "parentCommentId", cascade = CascadeType.ALL)
     private Set<ArticleComment> childComments = new LinkedHashSet<>();
 
     @Setter @Column(nullable = false, length = 500) private String content;     // 본문
