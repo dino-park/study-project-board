@@ -22,8 +22,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.greyson.projectboard.domain.QHashtag.hashtag;
-
 @Slf4j
 @RequiredArgsConstructor
 @Transactional
