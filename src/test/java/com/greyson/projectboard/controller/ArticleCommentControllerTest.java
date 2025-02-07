@@ -102,7 +102,7 @@ class ArticleCommentControllerTest {
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                         .content(formDataEncoder.encode(request))
                         .with(csrf())
-                )
+        )
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/articles/" + articleId))
                 .andExpect(redirectedUrl("/articles/" + articleId));

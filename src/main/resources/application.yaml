@@ -46,7 +46,6 @@ spring:
             user-info-uri: https://kapi.kakao.com/v2/user/me
             user-name-attribute: id
 
-
 ---
 
 spring:
@@ -56,3 +55,9 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa.hibernate.ddl-auto: create
   sql.init.mode: always
+
+---
+
+spring:
+  config.activate.on-profile: test
+  datasource.url: jdbc:h2:mem:testdb
