@@ -59,3 +59,6 @@ class KakaoOAuth2ResponseTest {
                 .hasFieldOrPropertyWithValue("kakaoAccount.email", "test@gmail.com");
     }
 }
+
+
+
